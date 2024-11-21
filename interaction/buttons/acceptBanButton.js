@@ -1,11 +1,17 @@
-const {} = require('discord.js')
-
 module.exports = {
     customId: 'acceptBanButton',
     async execute(interaction, client) {
         const userId = interaction.customId[2]
         const utilisateur = await interaction.guild.members.fetch(userId).catch(() => null)
 
+        if (interaction.user.id === userId) {
+            return interaction.reply({
+                content: 'Vous ne pouvez pas toucher vous même a votre demande bannissement',
+                embeds: [],
+                components: [],
+                ephermal: true
+            });
+        }
         if (!utilisateur) {
             return interaction.update({
                 content: '⚠️ Utilisateur introuvable ou déjà supprimé.',
@@ -23,9 +29,9 @@ module.exports = {
             });
         } catch (error) {
             client.error(error);
-            await interaction.update({
+            await interaction.reply({
                 content: `❌ Impossible de bannir **${utilisateur.user.tag}**.`,
-                embeds: [embed.setColor('Green')],
+                embeds: [],
                 components: [],
             });
         }

@@ -40,7 +40,7 @@ module.exports = (client) => {
                         guildId TEXT NOT NULL,
                         roleId TEXT NOT NULL,
                         date TEXT DEFAULT (datetime('now')),
-                        staff TEXT NOT NULL
+                        owner TEXT NOT NULL
                     )`,
                     (err) => {
                         if (err) {
