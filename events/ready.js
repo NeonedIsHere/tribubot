@@ -1,3 +1,7 @@
+const { ActivityType } = require('discord.js')
+
+const updateAllTrackedRoles = require("../function/updateAllTrackedRoles");
+
 module.exports = {
     name: 'ready',
     async execute(client) {
@@ -23,6 +27,11 @@ module.exports = {
 
             await new Promise(resolve => setTimeout(resolve, 999))
         }
+
+        client.guilds.cache.forEach(guild => { updateAllTrackedRoles(guild, client) })
+
+        client.user.setActivity('discord.gg/nasuna', { type: ActivityType.Streaming });
+
 
         client.online(`Le bot a démarré sous ${client.user.username} (${client.user.id})`);
     },

@@ -35,6 +35,19 @@ module.exports = {
                 );
             });
 
+            await new Promise((resolve, reject) => {
+                client.database.run(
+                    `DELETE FROM trackedRole`,
+                    (err) => {
+                        if (err) {
+                            reject(err)
+                        } else {
+                            resolve();
+                        }
+                    }
+                )
+            })
+
             interaction.reply({ content: 'Toutes les configurations ont été réinitialisées avec succès pour tous les serveurs !', ephemeral: false });
             console.log('Toutes les configurations ont été réinitialisées pour tous les serveurs');
 

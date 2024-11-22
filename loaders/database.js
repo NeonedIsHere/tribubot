@@ -51,6 +51,24 @@ module.exports = (client) => {
                     }
                 );
 
+                db.run(
+                    `CREATE TABLE IF NOT EXISTS trackedRole (
+                        guildId TEXT NOT NULL,
+                        roleId TEXT NOT NULL,
+                        baseName TEXT NOT NULL,
+                        maxCount INTEGER NOT NULL,
+                        date TEXT DEFAULT (datetime('now')),
+                        owner TEXT NOT NULL
+                    )`,
+                    (err) => {
+                        if (err) {
+                            client.error('Erreur lors de la création de la table trackedRole :', err.message);
+                        } else {
+                            client.data('Table "trackedRole" créée avec succès.');
+                        }
+                    } 
+                )
+
                 resolve(db);
             }
         });

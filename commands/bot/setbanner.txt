@@ -1,3 +1,6 @@
+Cette commandes est encore bug donc elle reste en txt pour l'instant. Sauf si une âme honnorable veux bien me la règler
+
+
 module.exports = {
     name: 'setbanner',
     description: 'Définir la bannière du bot',
