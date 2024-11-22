@@ -1,3 +1,5 @@
+const updateTrackedRoles = require("../../function/uptdateTrackedRoles");
+
 module.exports = {
     name: 'settrackrole',
     description: 'Définit un rôle à suivre',
@@ -61,6 +63,8 @@ module.exports = {
                         }
                     );
                 });
+
+                await updateTrackedRoles(interaction.guild, { roleId: role.id, baseName, maxCount: max });
 
                 return interaction.reply({
                     content: `Le rôle ${role} est déjà suivi. Ses paramètres ont été mis à jour : \`${baseName}\` avec un maximum de \`${max}\` membres.`,

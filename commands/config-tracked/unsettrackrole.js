@@ -52,6 +52,12 @@ module.exports = {
                 );
             });
 
+            const baseName = isTracked.baseName
+            if (role.id !== baseName) {
+                await role.setName(baseName)
+                console.log(`Rôle ${role.name} renommé en ${baseName}`);
+            }
+
             interaction.reply({
                 content: `Le rôle ${role} n'est maintenant plus suivi.`,
                 ephemeral: true,

@@ -53,6 +53,20 @@ module.exports = {
                 )
             })
 
+            await new Promise((resolve, reject) => {
+                client.database.run(
+                    `DELETE FROM embedColor WHERE guildId =?`,
+                    [guild],
+                    (err) => {
+                        if (err) {
+                            reject(err)
+                        } else {
+                            resolve()
+                        }
+                    }
+                )
+            })
+
             interaction.reply({ content: 'Configuration réinitialisée avec succès!', ephemeral: false })
             console.log(`Configuration réinitialisée pour le serveur ${guild}`)
 

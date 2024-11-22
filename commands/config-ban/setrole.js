@@ -1,5 +1,3 @@
-const { ChannelFlags, ChannelType } = require('discord.js')
-
 module.exports = {
     name: 'setrole',
     description: 'Définir le rôle de juge',

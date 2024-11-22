@@ -69,6 +69,22 @@ module.exports = (client) => {
                     } 
                 )
 
+                db.run(
+                    `CREATE TABLE IF NOT EXISTS embedColor (
+                        guildId TEXT NOT NULL,
+                        color TEXT NOT NULL,
+                        date TEXT DEFAULT (datetime('now')),
+                        owner TEXT NOT NULL
+                    )`,
+                    (err) => {
+                        if (err) {
+                            client.error('Erreur lors de la création de la table embedColor :', err.message);
+                        } else {
+                            client.data('Table "embedColor" créée avec succès.');
+                        }
+                    }
+                )
+
                 resolve(db);
             }
         });

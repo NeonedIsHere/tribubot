@@ -1,4 +1,5 @@
 const { EmbedBuilder } = require('discord.js');
+const getColorEmbed = require('../../function/getColorEmbed');
 
 module.exports = {
     name: 'trackrolelist',
@@ -25,8 +26,10 @@ module.exports = {
                 });
             }
 
+            const embedColor = await getColorEmbed(client, interaction.guild.id)
+
             const embed = new EmbedBuilder()
-                .setColor('#0000FF')
+                .setColor(embedColor)
                 .setTitle('Rôles Suivis')
                 .setDescription('Voici la liste des rôles actuellement suivis dans ce serveur :')
                 .setTimestamp()
@@ -48,7 +51,7 @@ module.exports = {
                 ]);
             });
 
-            await interaction.reply({ embeds: [embed], ephemeral: true });
+            await interaction.reply({ embeds: [embed], ephemeral: false });
         } catch (error) {
             console.error('Erreur lors de la récupération des rôles suivis :', error);
             await interaction.reply({

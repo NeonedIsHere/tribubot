@@ -1,6 +1,5 @@
 async function updateTrackedRoles(guild, roleInfo) {
     try {
-        // Récupérer le rôle à partir de son ID
         const role = await guild.roles.fetch(roleInfo.roleId);
 
         if (!role) {
@@ -8,13 +7,10 @@ async function updateTrackedRoles(guild, roleInfo) {
             return;
         }
 
-        // Nombre actuel de membres ayant ce rôle
         const memberCount = role.members.size;
 
-        // Créer le nouveau nom du rôle
         const newName = `${roleInfo.baseName} (${memberCount}/${roleInfo.maxCount})`;
 
-        // Vérifier si le nom est déjà correct avant de modifier
         if (role.name !== newName) {
             await role.setName(newName);
             console.log(`Nom du rôle mis à jour : ${role.name} → ${newName}`);
