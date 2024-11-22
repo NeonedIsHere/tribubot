@@ -23,14 +23,13 @@ module.exports = {
             const role = interaction.options.getRole('role');
             const guildId = interaction.guild.id;
 
-            // Vérifier si le rôle est suivi
             const isTracked = await new Promise((resolve, reject) => {
                 client.database.get(
                     `SELECT * FROM trackedRole WHERE guildId = ? AND roleId = ?`,
                     [guildId, role.id],
                     (err, row) => {
                         if (err) return reject(err);
-                        resolve(!!row); // Convertir le résultat en booléen
+                        resolve(!!row);
                     }
                 );
             });
@@ -42,7 +41,6 @@ module.exports = {
                 });
             }
 
-            // Supprimer le rôle s'il est suivi
             await new Promise((resolve, reject) => {
                 client.database.run(
                     `DELETE FROM trackedRole WHERE guildId = ? AND roleId = ?`,

@@ -37,7 +37,6 @@ module.exports = {
         const guildId = interaction.guild.id;
 
         try {
-            // Vérifie si le rôle est déjà suivi
             const existingRole = await new Promise((resolve, reject) => {
                 client.database.get(
                     `SELECT * FROM trackedRole WHERE guildId = ? AND roleId = ?`,
@@ -50,7 +49,6 @@ module.exports = {
             });
 
             if (existingRole) {
-                // Si le rôle est déjà suivi, mettez à jour ses paramètres
                 await new Promise((resolve, reject) => {
                     client.database.run(
                         `UPDATE trackedRole
@@ -69,7 +67,6 @@ module.exports = {
                 });
             }
 
-            // Si le rôle n'est pas suivi, insérez-le dans la base de données
             await new Promise((resolve, reject) => {
                 client.database.run(
                     `INSERT INTO trackedRole (guildId, roleId, baseName, maxCount, owner)
