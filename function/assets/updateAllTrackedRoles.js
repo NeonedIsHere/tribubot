@@ -14,7 +14,6 @@ async function updateAllTrackedRoles(guild, client) {
         });
 
         if (trackedRoles.length === 0) {
-            console.log(`Aucun rôle suivi trouvé pour le serveur ${guild.id}`);
             return;
         }
 

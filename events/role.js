@@ -1,4 +1,4 @@
-const updateTrackedRoles = require("../function/uptdateTrackedRoles");
+const { updateTrackedRoles } = require("../function/main");
 
 module.exports = {
     name: 'guildMemberUpdate',

@@ -1,6 +1,6 @@
 const { ActivityType } = require('discord.js')
 
-const updateAllTrackedRoles = require("../function/updateAllTrackedRoles");
+const { updateAllTrackedRoles } = require("../function/main.js");
 
 module.exports = {
     name: 'ready',

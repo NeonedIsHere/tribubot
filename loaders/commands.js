@@ -23,7 +23,7 @@ const loadCommands = (dir, client) => {
                     client.commands.set(command.name, command)
                     client.cmd(`Commande chargé: ${command.name} - ${file} ✅`)
                 } catch (err) {
-                    client.error(`Erreurs lors du chargement de la commande ${file}:`, err)
+                    client.error(err)
                 }
             }
         }
