@@ -1,19 +1,11 @@
 {
-<<<<<<< HEAD
     "token": "MTI1MzM4NTE1NjE3ODQ4MTE2Mg.GUpLVV.JT5n0IX_hwHXVCg12m1Z6tLtNf_hcQWsSIQPDE",
     "clientId": "1253385156178481162",
-=======
-    "token": "",
-    "clientId": "",
->>>>>>> f66bf4a01d45bd7dc4b63eb13c2e762e8586eee7
     "owners": [
         "1055826086157615114",
         "1209259539078058066",
         "1228400382028550234",
         "452404510766399489"
     ],
-    "webhook": "https://discord.com/api/webhooks/1310258852645699676/ajBHpvbOL81amQA8r5GYXAHLt4kihh4np6n5Xw3SiNDnK_f7pSLTgFIfYZJ1I-pzmPDZ",
-    "id" : {
-        "ban": ""
-    }
+    "webhook": "https://discord.com/api/webhooks/1310258852645699676/ajBHpvbOL81amQA8r5GYXAHLt4kihh4np6n5Xw3SiNDnK_f7pSLTgFIfYZJ1I-pzmPDZ"
 }
