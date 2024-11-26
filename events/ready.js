@@ -22,15 +22,13 @@ module.exports = {
                 require(loader.path)(client); 
                 client.success(`[Loaders] Le module "${loader.name}" a été chargé avec succès`);
             } catch (error) {
-                client.error(`[Loaders] Erreur lors du chargement du module "${loader.name}"`, error);
+                console.error(`[Loaders] Erreur lors du chargement du module "${loader.name}"`, error);
             }
 
             await new Promise(resolve => setTimeout(resolve, 999))
         }
 
         client.guilds.cache.forEach(guild => { updateAllTrackedRoles(guild, client) })
-
-        client.user.setActivity('discord.gg/nasuna', { type: ActivityType.Streaming });
 
 
         client.online(`Le bot a démarré sous ${client.user.username} (${client.user.id})`);

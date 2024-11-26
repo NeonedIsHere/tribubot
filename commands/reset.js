@@ -10,29 +10,29 @@ module.exports = {
             type: 'subcommandgroup',
             options: [
                 {
-                    name: 'serverall',
+                    name: 'serveur',
                     description: 'Réinitialise le rôle de juge pour ce serveur.',
                     type: 'subcommand'
                 },
                 {
-                    name: 'botall',
+                    name: 'bot',
                     description: 'Réinitialise les rôles de juge gérés par le bot.',
                     type: 'subcommand'
                 }
             ]
         },
         {
-            name: 'trackedrole',
+            name: 'track',
             description: 'Gestion des rôles suivis.',
             type: 'subcommandgroup',
             options: [
                 {
-                    name: 'servertrackrole',
+                    name: 'serveur',
                     description: 'Réinitialise les rôles suivis dans le serveur.',
                     type: 'subcommand'
                 },
                 {
-                    name: 'bottrackrole',
+                    name: 'bot',
                     description: 'Réinitialise les rôles suivis par le bot (inter-serveur).',
                     type: 'subcommand'
                 }
@@ -44,12 +44,12 @@ module.exports = {
             type: 'subcommandgroup',
             options: [
                 {
-                    name: 'serverchannel',
+                    name: 'serveur',
                     description: 'Réinitialise le salon de demande de bannissement du serveur.',
                     type: 'subcommand'
                 },
                 {
-                    name: 'botchannel',
+                    name: 'bot',
                     description: 'Réinitialise les salons de demande de bannissement du bot.',
                     type: 'subcommand'
                 }
@@ -61,12 +61,12 @@ module.exports = {
             type: 'subcommandgroup',
             options: [
                 {
-                    name: 'serverjuge',
+                    name: 'serveur',
                     description: 'Réinitialise le rôle de juge pour ce serveur.',
                     type: 'subcommand'
                 },
                 {
-                    name: 'botjuge',
+                    name: 'bot',
                     description: 'Réinitialise les rôles de juge gérés par le bot.',
                     type: 'subcommand'
                 }

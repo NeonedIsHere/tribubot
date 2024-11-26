@@ -1,5 +1,5 @@
 const { EmbedBuilder } = require('discord.js')
-const { getColorEmbed } = require('../../function/main')
+const { getColorEmbed } = require('../function/main')
 
 module.exports = {
     name: 'bot',
@@ -62,6 +62,45 @@ module.exports = {
                             description: 'URL de l\'image de la bannière',
                             type:'string',
                             required: true
+                        }
+                    ]
+                },
+                {
+                    name: 'status',
+                    description: 'Définir le statut du bot',
+                    type:'subcommand',
+                    options: [
+                        {
+                            name: '-_-',
+                            description: 'Nouveau statut du bot',
+                            type:'string',
+                            required: false,
+                        },
+                        {
+                            name: 'activity',
+                            description: 'Définir l\'activité du bot',
+                            type:'string',
+                            required: false,
+                            choices: [
+                                { name: 'Joue à', value: 'playing' },
+                                { name: 'Diffuse', value: 'streaming' },
+                                { name: 'Écoute', value: 'listening' },
+                                { name: 'Regarde', value: 'watching' },
+                                { name: 'Compétition', value: 'competing' },
+                                { name: 'Stream', value: 'streaming' },
+                            ],
+                        },
+                        {
+                            name: 'presence',
+                            description: 'Définir la présence du bot',
+                            type: 'string',
+                            required: false,
+                            choices: [
+                                { name: 'En ligne', value: 'online' },
+                                { name: 'Hors Ligne', value: 'offline' },
+                                { name: 'Inactif', value: 'idle' },
+                                { name: 'Ne pas Déranger', value: 'dnd'}
+                            ]
                         }
                     ]
                 }
@@ -205,7 +244,60 @@ module.exports = {
                         ephemeral: true,
                     });
                 }
+            } else if (subcommand === 'status') {
+                const text = interaction.options.getString('status');
+                const type = interaction.options.getString('activity');
+                const presence = interaction.options.getString('presence');
+
+                try {
+                    const currentPresence = client.user.presence || {};
+                    const currentActivities = currentPresence.activities?.[0] || {};
+
+                    const newText = text || currentActivities.name || 'Aucun statut';
+                    const newType = type ? {
+                        playing: 0,
+                        streaming: 1,
+                        listening: 2,
+                        watching: 3,
+                        competing: 5
+                    }[type] : currentActivities.type || 0;
+                    const newPresence = presence || currentPresence.status || 'online';
+
+                    await client.user.setPresence({
+                        activities: [
+                            {
+                                name: newText,
+                                type: newType
+                            }
+                        ],
+                        status: newPresence
+                    });
+
+                    const embed = new EmbedBuilder()
+                        .setTitle('Statut mis à jour')
+                        .setColor('#00FF00')
+                        .addFields(
+                            { name: 'Texte', value: newText, inline: true },
+                            { name: 'Type', value: type || 'Aucun changement', inline: true },
+                            { name: 'Présence', value: newPresence, inline: true }
+                        )
+                        .setTimestamp()
+                        .setFooter({
+                            text: `Demandé par ${interaction.user.tag}`,
+                            iconURL: interaction.user.displayAvatarURL({ dynamic: true }),
+                        });
+
+                    await interaction.reply({ embeds: [embed], ephemeral: true });
+                } catch (error) {
+                    console.error(error);
+                    interaction.reply({
+                        content: `Une erreur est survenue lors de la mise à jour du statut du bot.\n\`\`\`${error.message}\`\`\``,
+                        ephemeral: true,
+                    });
+                }
+
             }
+            
         }
     }
 }

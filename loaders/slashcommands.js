@@ -1,4 +1,4 @@
-const { SlashCommandBuilder, REST, Routes } = require('discord.js');
+const { REST, Routes } = require('discord.js');
 const { buildCommand } = require('../function/main')
 
 module.exports = async (client) => {
@@ -15,7 +15,6 @@ module.exports = async (client) => {
     try {
         client.cmd(`Déploiement de ${commands.length} commande(s) à Discord.`);
         await rest.put(Routes.applicationCommands(client.config.clientId), { body: commands });
-        client.cmd('Commandes enregistrées avec succès.');
     } catch (error) {
         console.error(error);
     }

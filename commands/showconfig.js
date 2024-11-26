@@ -1,5 +1,5 @@
 const { EmbedBuilder } = require('discord.js')
-const {getColorEmbed} = require('../../function/main')
+const {getColorEmbed} = require('../function/main')
 
 module.exports = {
     name: 'showconfig',

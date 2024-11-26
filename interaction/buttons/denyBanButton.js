@@ -1,6 +1,30 @@
 module.exports = {
-    customId: 'denyBanButton',
+    customId: 'denyBanButton:',
     async execute(interaction, client) {
+
+        if (!interaction.customId.startsWith('denyBanButton:')) return;
+        const userId = interaction.customId.split(':')[1];
+        
+        const juge = await new Promise((resolve, reject) =>{
+            client.database.get(
+                `SELECT roleId FROM role WHERE guildId = ?`,
+                [interaction.guild.id],
+                (err, row) => {
+                    if (err) reject(err);
+                    else resolve(row);
+                }
+            );
+        })
+
+        if (!interaction.member.roles.cache.has(juge.roleId)) {
+            return interaction.reply({
+                content: `Seuls les membres ayant les rôles <@&${juge.roleId}> peuvent intéragir avec les boutons`,
+                embeds: [],
+                components: [],
+                ephermal: true
+            });
+        }
+
         const { createModal } = require('../modals/denyBanModal');
         const modal = createModal();
 
@@ -24,7 +48,7 @@ module.exports = {
 
             const thread = await interaction.channel.threads.create({
                 name: `Refus - ${interaction.user.username}`,
-                autoArchiveDuration: 1440, // 24 heures
+                autoArchiveDuration: 1440,
                 reason: 'Thread pour la discussion sur le refus de bannissement.',
             });
 
@@ -37,7 +61,7 @@ module.exports = {
                     { name: 'Raison', value: reason, inline: false },
                     { name: 'Date', value: `<t:${Math.floor(Date.now() / 1000)}:F>`, inline: false }
                 )
-                .setColor('Red');
+                .setColor('#FF0000');
 
             await thread.send({ embeds: [embed] });
 

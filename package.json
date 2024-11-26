@@ -1,6 +1,6 @@
 {
   "name": "botslash",
-  "version": "1.0.0",
+  "version": "v2024.11.8",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -10,7 +10,9 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "axios": "^1.7.7",
     "chalk": "^5.3.0",
+    "express": "^4.21.1",
     "pallas-db": "^1.0.13",
     "sqlite3": "^5.1.7"
   }

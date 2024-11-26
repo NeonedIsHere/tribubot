@@ -21,6 +21,8 @@
     
     client.buttons = new Collection()
     client.commands = new Collection()
+    client.database = new Collection()
+    client.embeds = new Collection()
     client.modals = new Collection()
 
     console.clear()
