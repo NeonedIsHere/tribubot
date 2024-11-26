@@ -19,7 +19,6 @@ module.exports = {
                 await command.execute(interaction, client);
 
             } 
-            // Gestion des boutons
             else if (interaction.type === InteractionType.MessageComponent) {
                 const buttonHandler = client.buttons?.find(handler => interaction.customId.startsWith(handler.customId));
 
@@ -34,7 +33,6 @@ module.exports = {
                 await buttonHandler.execute(interaction, client);
 
             } 
-            // Gestion des formulaires modaux
             else if (interaction.type === InteractionType.ModalSubmit) {
                 const modalHandler = client.modals?.get(interaction.customId);
 
@@ -49,19 +47,16 @@ module.exports = {
                 await modalHandler.execute(interaction, client);
 
             } 
-            // Interaction non gérée
             else {
                 client.error(`[Interactions] Type d'interaction "${interaction.type}" non géré.`);
             }
         } catch (error) {
             client.error(`[Interactions] Erreur lors du traitement de l'interaction : ${error.message} ${error.stack}`);
 
-            // Empêcher une réponse multiple si l'interaction a déjà été répondue ou différée
             if (interaction.deferred || interaction.replied) {
                 return;
             }
 
-            // Réponse générique d'erreur
             await interaction.reply({
                 content: `Une erreur est survenue lors du traitement de votre interaction.`,
                 ephemeral: true,
