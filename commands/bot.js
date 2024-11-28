@@ -82,12 +82,11 @@ module.exports = {
                             type:'string',
                             required: false,
                             choices: [
-                                { name: 'Joue à', value: 'playing' },
-                                { name: 'Diffuse', value: 'streaming' },
-                                { name: 'Écoute', value: 'listening' },
-                                { name: 'Regarde', value: 'watching' },
-                                { name: 'Compétition', value: 'competing' },
-                                { name: 'Stream', value: 'streaming' },
+                                { name: 'Joue à', value: '0' },
+                                { name: 'Diffuse', value: '1' },
+                                { name: 'Écoute', value: '2' },
+                                { name: 'Regarde', value: '3' },
+                                { name: 'Compétition', value: '5' }
                             ],
                         },
                         {
@@ -245,59 +244,58 @@ module.exports = {
                     });
                 }
             } else if (subcommand === 'status') {
-                const text = interaction.options.getString('status');
-                const type = interaction.options.getString('activity');
-                const presence = interaction.options.getString('presence');
-
+                const newText = interaction.options.getString('status');
+                const newType = interaction.options.getString('activity');
+                const newPresence = interaction.options.getString('presence');
+            
+                // Log pour vérifier les valeurs reçues
+                console.log('Valeurs reçues :', { newText, newType, newPresence });
+            
+                // Récupérer les valeurs actuelles si des options ne sont pas fournies
+                const currentPresence = client.user.presence;
+            
+                const currentActivity = currentPresence.activities[0] || { name: '', type: 0 };
+                const currentStatus = currentPresence.status || 'online';
+            
+                // Définir les nouvelles valeurs ou garder celles existantes
+                const text = newText || currentActivity.name;
+                const type = newType ? parseInt(newType) : currentActivity.type; // Assurez-vous que type est un entier
+                const presence = newPresence || currentStatus;
+            
+                console.log('Paramètres pour setPresence :', { text, type, presence });
+            
                 try {
-                    const currentPresence = client.user.presence || {};
-                    const currentActivities = currentPresence.activities?.[0] || {};
-
-                    const newText = text || currentActivities.name || 'Aucun statut';
-                    const newType = type ? {
-                        playing: 0,
-                        streaming: 1,
-                        listening: 2,
-                        watching: 3,
-                        competing: 5
-                    }[type] : currentActivities.type || 0;
-                    const newPresence = presence || currentPresence.status || 'online';
-
                     await client.user.setPresence({
                         activities: [
                             {
-                                name: newText,
-                                type: newType
+                                name: text, // Texte de l'activité
+                                type: type // Type de l'activité, doit être un entier
                             }
                         ],
-                        status: newPresence
+                        status: presence // Statut global (online, idle, etc.)
                     });
-
+            
+                    console.log('Statut mis à jour avec succès.');
+            
                     const embed = new EmbedBuilder()
-                        .setTitle('Statut mis à jour')
-                        .setColor('#00FF00')
+                        .setTitle('Mise à jour du statut')
                         .addFields(
-                            { name: 'Texte', value: newText, inline: true },
-                            { name: 'Type', value: type || 'Aucun changement', inline: true },
-                            { name: 'Présence', value: newPresence, inline: true }
+                            { name: 'Texte', value: text || 'Aucun texte', inline: true },
+                            { name: 'Type', value: type.toString(), inline: true },
+                            { name: 'Présence', value: presence, inline: true }
                         )
-                        .setTimestamp()
-                        .setFooter({
-                            text: `Demandé par ${interaction.user.tag}`,
-                            iconURL: interaction.user.displayAvatarURL({ dynamic: true }),
-                        });
-
-                    await interaction.reply({ embeds: [embed], ephemeral: true });
+                        .setColor('Green');
+            
+                    await interaction.reply({ embeds: [embed] });
                 } catch (error) {
-                    console.error(error);
-                    interaction.reply({
-                        content: `Une erreur est survenue lors de la mise à jour du statut du bot.\n\`\`\`${error.message}\`\`\``,
-                        ephemeral: true,
+                    console.error('Erreur lors de la mise à jour du statut :', error);
+            
+                    await interaction.reply({
+                        content: `Erreur lors de la mise à jour du statut : \`${error.message}\``,
+                        ephemeral: true
                     });
                 }
-
-            }
-            
+            }            
         }
     }
 }
