@@ -11,38 +11,38 @@
 - sqlite3
 
 ## Liste des commandes avec options
-- **__Ban__**
-    | ask
-    | config
-        | channel
-        | juge
-        | show
-- **__bot__**
-    | set
-        | banner
-        | color
-        | name
-        | pic
-        | status
-- **__reset__**
-    | all
-        | bot
-        | serveur
-    | channel
-        | bot
-        | juge
-    | juge
-        | bot
-        | serveur
-    | track
-        | bot
-        | channel
-- **__trackrole__**
-    | add
-    | list
-    | remove
-- **__utils__**
-    | help
-    | ping
+- **__Ban__**<br>
+    | ask<br>
+    | config<br>
+        | channel<br>
+        | juge<br>
+        | show<br>
+- **__bot__**<br>
+    | set<br>
+        | banner<br>
+        | color<br>
+        | name<br>
+        | pic<br>
+        | status<br>
+- **__reset__**<br>
+    | all<br>
+        | bot<br>
+        | serveur<br>
+    | channel <br>
+        | bot<br>
+        | juge<br>
+    | juge <br>
+        | bot<br>
+        | serveur<br>
+    | track <br>
+        | bot<br>
+        | channel<br>
+- **__trackrole__** <br>
+    | add <br>
+    | list <br>
+    | remove<br>
+- **__utils__**<br>
+    | help<br>
+    | ping<br>
 
 ###### ça fais beaucoup hein.. Pourtant il n'y a que 5 fichier de commande !!
