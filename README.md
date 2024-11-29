@@ -11,20 +11,20 @@
 - sqlite3
 
 ## Liste des commandes avec options
-- Ban
+- **__Ban__**
     | ask
     | config
         | channel
         | juge
         | show
-- bot
+- **__bot__**
     | set
         | banner
         | color
         | name
         | pic
         | status
-- reset
+- **__reset__**
     | all
         | bot
         | serveur
@@ -37,11 +37,11 @@
     | track
         | bot
         | channel
-- trackrole
+- **__trackrole__**
     | add
     | list
     | remove
-- utils
+- **__utils__**
     | help
     | ping
 
