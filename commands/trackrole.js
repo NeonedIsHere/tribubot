@@ -77,7 +77,7 @@ module.exports = {
                     await new Promise((resolve, reject) => {
                         client.database.run(
                             `UPDATE trackedRole 
-                            SET baseName = ?, mewCount = ?, owner = ? 
+                            SET baseName = ?, newCount = ?, owner = ? 
                             WHERE guildId = ? AND roleId = ?`,
                             [basename, max, interaction.user.username, guildId, role.id],
                             (err) => {
@@ -105,7 +105,7 @@ module.exports = {
                     )
                 })
 
-                await updateTrackedRoles(interaction.guild, { roleId: role.id, baseName, maxCount: max })
+                await updateTrackedRoles(interaction.guild, { roleId: role.id, basename, maxCount: max })
                 interaction.reply(`Le rôle ${role} a été ajouté à la liste des rôles suivis.`);
 
             } catch (error) {
